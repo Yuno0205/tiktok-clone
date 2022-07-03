@@ -19,6 +19,7 @@ function Button({
   onClick,
   leftIcon,
   rightIcon,
+  className,
   ...passProps
 }) {
   let Comp = "button";
@@ -48,7 +49,7 @@ function Button({
     text,
     disabled,
     rounded,
-   
+    [className] : className,
   });
 
   return (

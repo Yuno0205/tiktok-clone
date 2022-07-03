@@ -11,11 +11,12 @@
 }
 
 .inner {
+    padding: 0 var(--default-layout-horizontal-spacer);
     height: 100%;
     width: var(--default-layout-width);
     display: flex;
     align-items: center;
-   justify-content: space-between;
+    justify-content: space-between;
 }
 
 .logo {
@@ -102,4 +103,5 @@
   margin-left: 28px;
   padding: 4px 8px;
   background-color: transparent;
+  cursor: pointer;
 }

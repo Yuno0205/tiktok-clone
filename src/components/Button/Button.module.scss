@@ -1,4 +1,5 @@
 .wrapper {
+    font-family: 'ProximaNova', sans-serif;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -11,6 +12,7 @@
     background-color: var(--white);
     border: 1px solid transparent;
     user-select: none;
+    
 
      + .wrapper {
         margin-left: 8px;

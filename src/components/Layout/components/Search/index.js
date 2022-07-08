@@ -9,8 +9,7 @@ import { SearchIcon } from "~/components/Icons";
 import classNames from "classnames/bind";
 import styles from "./Search.module.scss";
 import { useDebounce } from "~/hooks";
-import * as searchService from '~/apiServices/searchService'
-
+import * as searchService from "~/apiServices/searchService";
 
 const cx = classNames.bind(styles);
 
@@ -20,31 +19,37 @@ function Search() {
   const [showResult, setShowResult] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  const debounced = useDebounce(searchValue ,800);
+  const debounced = useDebounce(searchValue, 800);
 
   const inputRef = useRef();
 
   useEffect(() => {
-    if(!debounced.trim()) {
-        setSearchResult([]);
-       return
+    if (!debounced.trim()) {
+      setSearchResult([]);
+      return;
     }
 
-    const fetchAPI = async() => {
-      setLoading(true)
+    const fetchAPI = async () => {
+      setLoading(true);
 
       const result = await searchService.search(debounced);
       setSearchResult(result);
-      
-      setLoading(false)
-    }
+
+      setLoading(false);
+    };
 
     fetchAPI();
-
   }, [debounced]);
 
   const handleHideResult = () => {
     setShowResult(false);
+  };
+
+  const handleChange = (e) => {
+    const searchValue = e.target.value;
+    if (!searchValue.startsWith(" ")) {
+      setSearchValue(searchValue);
+    }
   };
 
   return (
@@ -55,10 +60,10 @@ function Search() {
         <div className={cx("search-result")} tabIndex="-1" {...attrs}>
           <PopperWrapper>
             <h4 className={cx("search-title")}>Accounts</h4>
-            {searchResult && searchResult.map((result) => {
-                return <AccountItem key={result.id} data={result}/>
-            })}
-           
+            {searchResult &&
+              searchResult.map((result) => {
+                return <AccountItem key={result.id} data={result} />;
+              })}
           </PopperWrapper>
         </div>
       )}
@@ -70,7 +75,7 @@ function Search() {
           value={searchValue}
           placeholder="Search accounts and videos"
           spellCheck={false}
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={handleChange}
           onFocus={() => setShowResult(true)}
         />
         {!!searchValue && !loading && (
@@ -87,9 +92,14 @@ function Search() {
           </button>
         )}
 
-       {loading &&  <FontAwesomeIcon className={cx("loading")} icon={faSpinner} />}
+        {loading && (
+          <FontAwesomeIcon className={cx("loading")} icon={faSpinner} />
+        )}
 
-        <button className={cx("search-btn")}>
+        <button
+          className={cx("search-btn")}
+          onMouseDown={(e) => e.preventDefault()}
+        >
           <SearchIcon />
         </button>
       </div>

@@ -46,7 +46,8 @@ function Header() {
             type: "language",
             code: "vi",
             title: "Tiếng Việt",
-          },
+          }
+        
         ],
       },
     },

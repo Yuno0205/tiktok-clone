@@ -1,5 +1,5 @@
 
-import {HeaderOnly} from '~/components/Layout'
+import {HeaderOnly} from '~/layouts'
 import routesConfig from '~/config/routes';
 import Following from '~/pages/Following';
 import Home from '~/pages/Home';
